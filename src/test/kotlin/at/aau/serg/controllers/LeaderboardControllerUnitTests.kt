@@ -9,19 +9,19 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.mockito.Mockito.`when` as whenever // when is a reserved keyword in Kotlin
 
-class LeaderboardControllerTests {
+class LeaderboardControllerUnitTests {
 
     private lateinit var mockedService: GameResultService
     private lateinit var controller: LeaderboardController
 
     @BeforeEach
     fun setup() {
-        mockedService = mock<GameResultService>()
+        mockedService = mock()
         controller = LeaderboardController(mockedService)
     }
 
     @Test
-    fun test_getLeaderboard_correctScoreSorting() {
+    fun getLeaderboardShouldSortScoresCorrectly() {
         val first = GameResult(1, "first", 20, 20.0)
         val second = GameResult(2, "second", 15, 10.0)
         val third = GameResult(3, "third", 10, 15.0)
@@ -38,7 +38,7 @@ class LeaderboardControllerTests {
     }
 
     @Test
-    fun test_getLeaderboard_sameScore_CorrectIdSorting() {
+    fun getLeaderboardShouldSortResultsWithSameScoreByTime() {
         val first = GameResult(1, "first", 20, 20.0)
         val second = GameResult(2, "second", 20, 10.0)
         val third = GameResult(3, "third", 20, 15.0)
